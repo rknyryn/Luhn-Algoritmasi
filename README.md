@@ -31,3 +31,20 @@ basit bir yöntemi olarak kullanır.
     5 + 7 + 4 + 9 + 6 + 9 + 1 + 6 + 2 + 8 + 5 + 4 + 2 + 0 + 2 + 3= 73
     Adım 4 – Mod 10’a göre (73/10=7.3 tam bölünmez.)
     73 % 10 = 3 -> kart numarası geçersizdir.
+    
+### Gereksinimler
+    MinGW
+### Windows için Makefile Dosyası İçeriği
+```
+all: clean file.o luhn.o
+	gcc file.o luhn.o ./src/main.c -o main
+
+file.o: ./src/lib/file.h
+	gcc -c ./src/file.c
+
+luhn.o: ./src/lib/luhn.h
+	gcc -c ./src/luhn.c
+
+clean:
+	del *.o main
+```
