@@ -7,7 +7,7 @@
 char *removeSpace(char *data)
 {
     //Bellekten yer ayırılıyor
-    char *temp = (char *)malloc((16) * sizeof(char));
+    char *temp = data;
     int j = 0;
     //Verinin tüm rakamlarını kontrol etmek için döngü
     for (int i = 0; i < 20; i++)
@@ -47,11 +47,12 @@ void read(char *fileName)
         fgets(line, size, dataFile);
         //Satır sonu işareti yerine NULL byte atanıyor
         line[19] = '\0';
+        printf("%s", line);
         //Luhn algoritması kontrolü gerçekleştiriliyor
         if(control(removeSpace(line)) == 0)
-            printf("%s gecerli\n", line);
+            printf(" gecerli\n");
         else
-            printf("%s gecersiz\n", line);
+            printf(" gecersiz\n");
     }
 
     //Bellekten ayrılan yer serbest bırakılıyor
