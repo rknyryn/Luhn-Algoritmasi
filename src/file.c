@@ -4,23 +4,13 @@
 #include "./lib/file.h"
 #include "./lib/luhn.h"
 
-char *removeSpace(char *data)
+void removeSpace(char *data)
 {
-    //Bellekten yer ayırılıyor
-    char *temp = data;
-    int j = 0;
-    //Verinin tüm rakamlarını kontrol etmek için döngü
-    for (int i = 0; i < 20; i++)
-    {
-        //Eğer boşluk veya satır sonu değilse; geçici değişkene ekleniyor
-        if (data[i] != ' ' && data[i] != '\n')
-        {
-            temp[j] = data[i];
-            j++;
-        }
-    }
-    //Geçici değişken; boşluklardan ve satır sonu işaretlerinden arındırılmış olarak geri döndürülüyor
-    return temp;
+    int count = 0;
+    for (int i = 0; data[i]; i++)
+        if (data[i] != ' ')
+            data[count++] = data[i];
+    data[count] = '\0';
 }
 
 void read(char *fileName)
@@ -48,8 +38,9 @@ void read(char *fileName)
         //Satır sonu işareti yerine NULL byte atanıyor
         line[19] = '\0';
         printf("%s", line);
+        removeSpace(line);
         //Luhn algoritması kontrolü gerçekleştiriliyor
-        if(control(removeSpace(line)) == 0)
+        if (control(line) == 0)
             printf(" gecerli\n");
         else
             printf(" gecersiz\n");
